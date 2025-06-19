@@ -68,8 +68,7 @@ Developed as part of the final-year project at **Sandip Institute of Technology 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/plant-growth-cnn.git
-   cd plant-growth-cnn
+   git clone https://github.com/nileshsonawanes/Plant-Growth-Prediction-Using-CNN
    ```
 
 2. Install required packages:
