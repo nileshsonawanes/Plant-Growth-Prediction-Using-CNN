@@ -1,0 +1,12 @@
+
+Flask
+tensorflow
+keras
+opencv-python
+numpy
+pandas
+scikit-learn
+matplotlib
+seaborn
+Pillow
+joblib
