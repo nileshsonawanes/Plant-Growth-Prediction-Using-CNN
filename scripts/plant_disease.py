@@ -15,6 +15,21 @@ import seaborn as sns
 from sklearn.metrics import confusion_matrix, classification_report
 
 from keras.models import load_model
+import gdown
+
+# Define the model path
+model_path = "keras_model.h5"
+
+# If the model is not present locally, download it
+if not os.path.exists(model_path):
+    print("Downloading keras_model.h5 from Google Drive...")
+    file_id = "1dKJBZUvGBxm3aPNoJ82XsjKiBkzgszmC"
+    gdown.download(f"https://drive.google.com/uc?id={file_id}", model_path, quiet=False)
+
+# Load the model after downloading
+from keras.models import load_model
+model = load_model(model_path)
+
 
 # Paths for model and label binarizer
 model_path = 'keras_model.h5'
