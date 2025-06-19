@@ -1,0 +1,42 @@
+{% extends 'layout.html' %} {% block body %}
+
+
+<style>
+  html body {
+    background-color: rgb(206, 206, 228);
+  }
+  
+</style>
+<br /><br />
+<h2 style="text-align: center; margin: 0px; color: black; font-size: 35px;">
+  <b>Findout Plant Growth Stages Here...</b>
+</h2>
+<br />
+<br>
+ 
+<div class="container">
+  
+
+  <form class="form-signin" method=post enctype=multipart/form-data action="{{ url_for('plant_growth_prediction') }}">
+<label for="input-file" id="drop-area">
+  
+  <input type="file" id="input-file" accept="image/*" name="file" class="form-control-file" style="font-weight: bold;" hidden>
+  <div id="img-view">
+    <img id="output-image" src="static/images/upload.png" alt="upload" style="width: 260px; height: 260px; ">
+    <p>Click Here to Upload Image</p>
+      <span>Upload The Plant Image</span>
+    
+  </div>
+</label>
+  
+<br>
+
+<br>
+    <button class="submit" type="submit">PREDICT PLANT GROWTH</button>
+  
+  </form>
+
+</div>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+ 
+{% endblock %}

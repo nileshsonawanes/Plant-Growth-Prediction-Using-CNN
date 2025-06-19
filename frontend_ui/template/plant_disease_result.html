@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Plant Disease Detection Result</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}" />
+
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    
+</head>
+<body>
+    {% block navbar %}
+    
+
+    <nav class="navbar navbar-expand-lg fixed-top">                
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="{{ url_for('plant_disease_detection') }}">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" class="navbar-brand-image img-fluid" alt="Harvestify Logo" style="width: 30px; height: 30px; filter: none;">
+                Plant Disease Detection
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-lg-auto">
+<li class="nav-item">
+<a class="nav-link click-scroll smoothscroll" href="{{ url_for('home') }}">HOME</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="{{ url_for('logout') }}">LOGOUT</a>
+</li>
+                </ul>
+
+                
+            </div>
+        </div>
+    </nav>
+    <style>
+        body {
+            padding-top: 130px; /* Adjust this value based on navbar height */
+        }
+    </style>
+    {% endblock %}
+    
+    
+    <div class="container mt-5">
+        <div class="text-center mb-3">
+          <form action="{{ url_for('plant_disease_detection') }}" method="get" style="display: inline;">
+              <button type="submit" class="submit">DETECT ANOTHER PLANT DISEASE</button>
+          </form>
+      </div>
+    <div class="container mt-5" style="padding: 20px; border-radius: 8px;">
+        <h2 class="text-center mb-4">Plant Disease Detection Result</h2>
+        <div class="text-center mb-4">
+            <img src="{{ url_for('static', filename='input/' + image_filename) }}" alt="Uploaded Leaf Image" class="img-fluid" style="max-height: 400px;" />
+        </div>
+        <div style="background-color: #b9f8f6; color: rgb(30, 88, 1); padding: 15px; border-radius: 8px;">
+            <h4>Predicted Disease: {{ label }}</h4>
+            <div class="mt-3">
+                <p>{{ disease_info|safe }}</p>
+            </div>
+        </div>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <!-- Footer -->
+    
+    <footer style="background-color: #d8c8b6; color: rgb(32, 96, 0); text-align: center; padding: 0rem 0;  width: 100%; margin-top: 100px;">
+        <p>© 2025 Harvestify. All rights reserved.</p>
+      </footer>
+</body>
+</html>
+    

@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title> Harvestify </title>
+
+        <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}" />
+
+        <!-- CSS FILES -->                
+
+        <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+
+        <link href="{{ url_for('static', filename='css/vegas.min.css') }}" rel="stylesheet">
+
+        <link href="{{ url_for('static', filename='css/tooplate-cafe.css') }}" rel="stylesheet">
+        
+    </head>
+    
+    <body>
+                
+            <main>
+                <nav class="navbar navbar-expand-lg">                
+                    <div class="container">
+                        <a class="navbar-brand d-flex align-items-center" href="{{ url_for('welcome') }}">
+                            <img src="{{ url_for('static', filename='images/logo.png') }}" class="navbar-brand-image img-fluid" alt="Harvestify Logo" style="width: 30px; height: 30px; filter: none;">
+                            Harvestify
+                        </a>
+        
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+        
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav ms-lg-auto">
+<li class="nav-item">
+    <a class="nav-link click-scroll smoothscroll" href="{{ url_for('welcome') }}">HOME</a>
+</li>
+        
+                                <li class="nav-item">
+                                    <a class="nav-link click-scroll smoothscroll" href="#section_2">ABOUT US</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link click-scroll smoothscroll" href="#section_3">OUR SERVICES</a>
+                                </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="{{ url_for('login') }}">LOGIN</a>
+</li>
+                            </ul>
+
+                            
+                        </div>
+                    </div>
+                </nav>
+
+
+                <section class="hero-section d-flex justify-content-center align-items-center" id="section_1">
+
+                    <div class="container">
+                        <div class="row align-items-center">
+
+                            <div class="col-lg-6 col-12 mx-auto">
+                                <h1 class="text-white">Welcome to Plant Growth Prediction</h1>
+                                <p class="text-white mb-4 pb-lg-2">Your resource for predicting and managing plant growth effectively.</p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="hero-slides"></div>
+                </section>
+
+
+                <section class="about-section section-padding" id="section_2">
+                    <div class="section-overlay"></div>
+                    <div class="container">
+                        <h2 class="mb-3 text-center text-white">About Us</h2>
+                        <div class="row align-items-center">
+
+                            <div class="col-lg-6 col-12">
+                                <div class="ratio ratio-1x1">
+                                    <img src="{{ url_for('static', filename='images/aboutus.jpg') }}" alt="About Us Image">
+
+                                    <div class="about-video-info d-flex flex-column">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-5 col-12 mt-4 mt-lg-0 mx-auto">
+                                
+
+                                <h2 class="text-white mb-3">Harvestify</h2>
+
+                                <p class="text-white"> At Harvestify, we empower farmers and plant enthusiasts with AI-driven insights to support smarter agricultural decisions. Our platform allows users to upload images of their plants, and in return, it accurately predicts the plant's growth stage using advanced machine learning techniques. Based on the detected stage, Harvestify also provides personalized fertilizer recommendations to ensure optimal growth and yield. We're committed to making modern farming more efficient, sustainable, and accessible through the power of technology.
+                                    </p>
+
+
+                                
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+
+
+
+
+                <section class="menu-section section-padding" id="section_3" style="background-color: #ffffff;">
+                    <div class="container">
+                        <h2 class="mb-3 text-center" style="color: #1e5801;">Our Services</h2>
+                        <div class="row">
+                            <div class="col-lg-4 col-12 mb-4 mb-lg-0">
+                                <a href="{% if current_user.is_authenticated %}{{ url_for('plant_growth_prediction') }}{% else %}{{ url_for('login') }}{% endif %}" style="text-decoration: none; color: inherit;">
+                                    <div class="menu-block-wrap" style="display: flex; flex-direction: column; align-items: center; height: 550px;">
+                                        <img src="{{ url_for('static', filename='images/plant-growth-prediction.jpg') }}" alt="Delicious Menu Image" class="img-fluid mb-3 rounded" style="max-width: 100%; height: auto;">
+                                        <div class="text-center mb-4 pb-lg-2">
+                                            <h4 class="text-white">Plant Growth<br>Prediction</h4>
+                                        </div>
+                                        <p class="text-white px-3 text-center">Monitor and optimize plant growth stages with our advanced tools, ensuring healthy plants and maximum productivity.</p>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-lg-4 col-12 mb-4 mb-lg-0">
+                                <a href="{% if current_user.is_authenticated %}{{ url_for('plant_disease_detection') }}{% else %}{{ url_for('login') }}{% endif %}" style="text-decoration: none; color: inherit;">
+                                <div class="menu-block-wrap" style="display: flex; flex-direction: column; align-items: center; height: 550px;">
+                                    <img src="{{ url_for('static', filename='images/plant-disease-detection.jpg') }}" alt="Favourite Menu Image" class="img-fluid mb-3 rounded" style="max-width: 100%; height: auto;">
+                                    <div class="text-center mb-4 pb-lg-2">
+                                        <h4 class="text-white">Plant Disease<br>Detection</h4>
+                                    </div>
+                                    <p class="text-white px-3 text-center">Identify plant diseases instantly with AI, enabling faster decisions and better crop protection for maximum yield.</p>
+                                </div>
+                            </a>
+                            </div>
+
+                            <div class="col-lg-4 col-12">
+                                <a href="{% if current_user.is_authenticated %}{{ url_for('fertilizer_recommendation') }}{% else %}{{ url_for('login') }}{% endif %}" style="text-decoration: none; color: inherit;">
+                                    <div class="menu-block-wrap" style="display: flex; flex-direction: column; align-items: center; height: 550px;">
+                                        <img src="{{ url_for('static', filename='images/fertilizers.jpg') }}" alt="Special Menu Image" class="img-fluid mb-3 rounded" style="max-width: 100%; height: auto;">
+                                        <div class="text-center mb-4 pb-lg-2">
+                                            <h4 class="text-white">Fertilizers Recommendation</h4>
+                                        </div>
+                                        <p class="text-white px-3 text-center">Find the best fertilizers tailored to your crops, enhancing growth and yield with scientifically proven formulations.</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+
+
+                <footer style="background-color: #ffffff; color: rgb(30, 88, 1); text-align: center; padding: 1rem 0;">
+                    <p>© 2025 Harvestify. All rights reserved.</p>
+                </footer>
+            </main>
+
+        <!-- JAVASCRIPT FILES -->
+        <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/jquery.sticky.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/click-scroll.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/vegas.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+
+    </body>
+</html>

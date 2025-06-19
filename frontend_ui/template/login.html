@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="ISO-8859-1">
+  <title>Login</title>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/form1.css') }}">
+</head>
+<body>
+  <section class="container">
+    <nav>
+      <div class="nav__bar">
+        <a href="#" class="nav__logo">
+          <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Harvestify logo" />
+          <span>Harvestify</span>
+        </a>
+        <div class="nav__menu__btn" id="menu-btn">
+          <i class="ri-menu-3-line"></i>
+        </div>
+      </div>
+      <ul class="nav__links" id="nav-links">
+        <li><a href="{{ url_for('welcome') }}">HOME</a></li>
+      </ul>
+    </nav>
+
+    <div class="welcome-message" style="text-align:center; margin: 0.5rem 0 0 0; color: white;">
+      <h1>Welcome to Crop Growth Prediction</h1>
+      <p>Your resource for predicting and managing plant growth effectively.</p>
+      <div class="top" style="margin-top: 0.75rem;">
+        <header style="margin-top: 0; margin-bottom: 0.5rem;">Login</header>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              {% if category == 'danger' and ('username' in message|lower or 'password' in message|lower) %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                  {{ message }}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="{{ url_for('login') }}">
+          <div class="input-box">
+            <input type="email" name="email" class="input-field" placeholder="Enter your Email address" required>
+            <i class="bx bx-user"></i>
+          </div>
+          <div class="input-box">
+            <input type="password" name="password" class="input-field" placeholder="Enter Password" required>
+            <i class="bx bx-lock-alt"></i>
+          </div>
+          <div class="input-box">
+            <input type="submit" class="submit" value="Sign In">
+          </div>
+          <div class="two-col">
+            <div class="one">
+              <input type="checkbox" id="login-check" name="remember">
+              <label for="login-check"> Remember Me</label>
+            </div>
+            <div class="two">
+              <label><a href="#">Forgot password?</a></label>
+            </div>
+          </div>
+        </form>
+
+        <p class="account-link" align="center">
+          Don't have an account? <a href="{{ url_for('signup') }}">Sign up</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer style="background-color: #ffffff; color: rgb(30, 88, 1); text-align: center; padding: 1rem 0; position: fixed; width: 100%; bottom: 0;">
+    <p>© 2025 Harvestify. All rights reserved.</p>
+  </footer>
+
+  <!-- Static placeholders for potential messages -->
+  <script>
+    // Replace with actual logic or leave commented
+    // alert("Something Went Wrong Login Again!!");
+    // alert("Invalid Account Number!!");
+    // alert("Invalid Password!!");
+  </script>
+</body>
+</html>

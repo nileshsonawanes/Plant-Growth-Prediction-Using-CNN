@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% if title %}{{ title }} {% else %} Fertilizer Recommendation {% endif %}</title>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" />
+
+
+</head>
+
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
+</style>
+
+<body style="background-color: #d8c8b6; color: rgb(30, 88, 1); min-height: 100vh; padding-top: 100px;">
+
+    <nav class="navbar navbar-expand-lg fixed-top">                
+        <div class="container">
+          <a class="navbar-brand d-flex align-items-center" href="{{ url_for('plant_growth_prediction') }}">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" class="navbar-brand-image img-fluid" alt="Harvestify Logo" style="width: 30px; height: 30px; filter: none;">
+            Fertilizer Recommendation
+          </a>
+      
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+      
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-lg-auto">
+              <li class="nav-item">
+                <a class="nav-link click-scroll smoothscroll" href="{{ url_for('home') }}">HOME</a>
+              </li>
+      
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('logout') }}">LOGOUT</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      
+
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">Fertilizer Recommendation</h2>
+    <div class="text-center mb-3">
+      <form action="{{ url_for('fertilizer_recommendation') }}" method="get" style="display: inline;">
+          <button type="submit" class="submit">FIND ANOTHER FERTILIZER RECOMMENDATION</button>
+      </form>
+  </div>
+    {% if recommendation %}
+    <div class="alert alert-info" role="alert">
+      <h5>Fertilizer Recommendation:</h5>
+      <p>{{ recommendation|safe }}</p>
+    
+    {% if additional_info %}
+    <div class="alert alert-secondary" role="alert">
+      <h6>Additional Information:</h6>
+      <p>{{ additional_info }}</p>
+    </div>
+    {% endif %}
+    <h5>User Input:</h5>
+    <ul>
+      <li>Temperature: {{ temp }}</li>
+      <li>Humidity: {{ humid }}</li>
+      <li>Moisture: {{ mois }}</li>
+      <li>Soil Type: 
+        {% if soil == '0' %}Black{% elif soil == '1' %}Clayey{% elif soil == '2' %}Loamy{% elif soil == '3' %}Red{% elif soil == '4' %}Sandy{% else %}Unknown{% endif %}
+      </li>
+      <li>Crop Type: 
+        {% if crop == '0' %}Barley{% elif crop == '1' %}Cotton{% elif crop == '2' %}Ground Nuts{% elif crop == '3' %}Maize{% elif crop == '4' %}Millets{% elif crop == '5' %}Oil Seeds{% elif crop == '6' %}Paddy{% elif crop == '7' %}Pulses{% elif crop == '8' %}Sugarcane{% elif crop == '9' %}Tobacco{% elif crop == '10' %}Wheat{% elif crop == '11' %}coffee{% elif crop == '12' %}kidneybeans{% elif crop == '13' %}orange{% elif crop == '14' %}pomegranate{% elif crop == '15' %}rice{% elif crop == '16' %}watermelon{% else %}Unknown{% endif %}
+      </li>
+      <li>Nitrogen: {{ nitro }}</li>
+      <li>Potassium: {{ pota }}</li>
+      <li>Phosphorous: {{ phos }}</li>
+    </ul>
+    {% else %}
+    <p class="text-center">No recommendation available.</p>
+    {% endif %}
+  </div>
+</div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    let menu = document.querySelector('#menu-bar');
+    let navbar = document.querySelector('.navbar');
+
+    menu.onclick = () => {
+      menu.classList.toggle('fa-times');
+      navbar.classList.toggle('active');
+    };
+    window.onscroll = () => {
+      menu.classList.remove('fa-times');
+      navbar.classList.remove('active');
+
+      if (window.scrollY > 60) {
+        document.querySelector('#scroll-top').classList.add('active');
+      } else {
+        document.querySelector('#scroll-top').classList.remove('active');
+      }
+    };
+  </script>
+    <!-- Footer -->
+    
+    <footer style="background-color: #d8c8b6; color: rgb(32, 96, 0); text-align: center; padding: 1rem 0;  width: 100%; bottom: 0;">
+        <p>© 2025 Harvestify. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

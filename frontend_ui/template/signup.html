@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="ISO-8859-1">
+  <title>Sign Up</title>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/form1.css') }}">
+</head>
+<body>
+  <section class="container">
+    <nav>
+      <div class="nav__bar">
+        <a href="#" class="nav__logo">
+          <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Harvestify logo" />
+          <span>Harvestify</span>
+        </a>
+        <div class="nav__menu__btn" id="menu-btn">
+          <i class="ri-menu-3-line"></i>
+        </div>
+      </div>
+      <ul class="nav__links" id="nav-links">
+        <li><a href="{{ url_for('welcome') }}">HOME</a></li>
+      </ul>
+    </nav>
+
+    <div class="welcome-message" style="text-align:center; margin: 0.5rem 0 0 0; color: white;">
+      <h1>Welcome to Crop Growth Prediction</h1>
+      <p>Your resource for predicting and managing plant growth effectively.</p>
+      <div class="top" style="margin-top: 0.75rem;">
+        <header style="margin-top: 0; margin-bottom: 0.5rem;">Register</header>
+        <form method="POST" action="{{ url_for('signup') }}">
+          <div class="input-box">
+            <input type="text" name="name" class="input-field" placeholder="Enter your Name" pattern="^[a-zA-Z]+(\s[a-zA-Z]+)?$" title="Enter A valid Name" required>
+            <i class="bx bx-user"></i>
+          </div>
+          <div class="input-box">
+            <input type="email" name="email" class="input-field" placeholder="Enter your Email address" required>
+            <i class="bx bx-envelope"></i>
+          </div>
+          <div class="input-box">
+            <input type="password" name="password" class="input-field" placeholder="Enter Password" required>
+            <i class="bx bx-lock-alt"></i>
+          </div>
+          <div class="input-box">
+            <input type="password" name="confirm_password" class="input-field" placeholder="Confirm Password" required>
+            <i class="bx bx-lock-alt"></i>
+          </div>
+          <div class="input-box">
+            <input type="submit" class="submit" value="Signup">
+          </div>
+          <div class="two-col">
+            <div class="one">
+              <input type="checkbox" id="register-check" name="remember">
+              <label for="register-check"> Remember Me</label>
+            </div>
+            <div class="two">
+              <label><a href="#">Terms & conditions</a></label>
+            </div>
+          </div>
+        </form>
+        <p class="account-link" align="center">
+          Have an account? <a href="{{ url_for('login') }}">Login</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  <footer style="background-color: #ffffff; color: rgb(30, 88, 1); text-align: center; padding: 1rem 0; position: fixed; width: 100%; bottom: 0;">
+    <p>© 2025 Harvestify. All rights reserved.</p>
+  </footer>
+  </section>
+
+  <!-- Static placeholders for potential messages -->
+  <script>
+    // Replace with actual logic or leave commented
+    // alert("Account Number Already Present Go to Login!!");
+  </script>
+</body>
+</html>

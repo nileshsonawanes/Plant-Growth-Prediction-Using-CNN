@@ -1,0 +1,129 @@
+{% extends 'layout.html' %}
+
+
+
+{% block navbar %}
+    
+
+    <nav class="navbar navbar-expand-lg fixed-top">                
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="{{ url_for('plant_growth_prediction') }}">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" class="navbar-brand-image img-fluid" alt="Harvestify Logo" style="width: 30px; height: 30px; filter: none;">
+                Plant Growth Prediction
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-lg-auto">
+<li class="nav-item">
+<a class="nav-link click-scroll smoothscroll" href="{{ url_for('home') }}">HOME</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="{{ url_for('logout') }}">LOGOUT</a>
+</li>
+                </ul>
+
+                
+            </div>
+        </div>
+    </nav>
+    {% endblock %}
+
+    
+
+{% block body %}
+                <div class="text-center mb-3">
+                    <form action="{{ url_for('plant_growth_prediction') }}" method="get" style="display: inline;">
+                        <button type="submit" class="submit">PREDICT ANOTHER PLANT GROWTH</button>
+                    </form>
+                </div>
+<div class="container py-2 mx-auto my-50 h-10 " style="margin: 2rem;">
+    <div class="row">
+        <div class="col-sm py-2 py-md-3">
+            <div class="card card-body" style="justify-content: center; background-color: #f8f8f8; border-radius: 10px;">
+                {% if disease %}
+                <h3 class="text-center" style="color: black; font-size: 30px;">Growth Details</h3>
+                
+                
+
+                <ul class="text-center" style="color: black; font-size: 22px; list-style: none; padding: 0;">
+                    {% for key, value in disease.items() %}
+                    <li><strong>{{ key }}:</strong> {{ value }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                
+                
+                
+
+                
+                {% if image_filename %}
+                <h3 class="text-center" style="color: black; font-size: 24px;">Input Image</h3>
+                <table style="width: 100%; border-collapse: separate; border-spacing: 0; color: black; font-size: 22px; border: 2px solid #7a7a7a; margin-bottom: 1rem; border-radius: 20px; background-color: #f8f8f8;">
+                    <tr style="border-bottom: 2px solid #7a7a7a;">
+                        <td style="width: 45%; vertical-align: top; padding: 10px; border-top-left-radius: 20px; border-bottom-left-radius: 20px; border-right: 2px solid #7a7a7a;">
+                            <img src="{{ url_for('static', filename='input/' + image_filename) }}" alt="Uploaded Plant Image"
+                                style="max-width: 400px; border: 2px solid #7a7a7a; border-radius: 20px 0 0 20px; display: block; margin-left: 4rem;">
+                        </td>
+                        <td style="width: 55%; vertical-align: top; padding: 10px;">
+                            {% if additional_info_dict and closest_stage in additional_info_dict %}
+                            <ol style="padding-left: 20px; margin-top: 10px; color: black;">
+                                <li style="color: black;"><strong>Plant Information:</strong> {{ additional_info_dict[closest_stage].plant_info }}</li>
+                                <li style="color: black;"><strong>Stage:</strong> {{ closest_stage }}</li>
+                            </ol>
+                            {% else %}
+                            <p style="color: black;">No additional information available for the input image.</p>
+                            {% endif %}
+                        </td>
+                    </tr>
+                </table>
+                {% endif %}
+                <h3 class="text-center" style="color: black; font-size: 30px;">Predicted Growth Stages</h3>
+                
+
+                
+
+                {% if image_path %}
+              
+                {% for key, value in image_path.items() %}
+                {% set stage_num = key.split(' ')[1]|int %}
+                <table style="width: 100%; border-collapse: separate; border-spacing: 0; color: #7a7a7a; font-size: 22px; border: 2px solid #7a7a7a; margin-bottom: 1rem; border-radius: 20px; background-color: #f8f8f8;">
+                    <tr>
+                        <td style="width: 45%; vertical-align: top; padding: 10px; border-top-left-radius: 20px; border-bottom-left-radius: 20px; border-right: 2px solid #7a7a7a;">
+                            <img src="{{ url_for('static', filename='train/' + value) }}" alt="Uploaded Plant Image"
+                                style="max-width: 400px; border: 2px solid #7a7a7a; border-radius: 20px 0 0 20px; display: block; margin-left: 4rem;">
+                        </td>
+                        <td style="width: 55%; vertical-align: top; padding: 10px; border-top-right-radius: 20px; border-bottom-right-radius: 20px;">
+                {% if additional_info_dict and additional_info_dict[stage_num] %}
+                <ol style="padding-left: 20px; margin-top: 10px; color: black;">
+                    <li style="color: black;"><strong>Plant Information:</strong> {{ additional_info_dict[stage_num].plant_info }}</li>
+                    <li style="color: black;"><strong>Stage:</strong> {{ stage_num }}</li>
+                    {% set fert_parts = additional_info_dict[stage_num].fertilizer_recommendation.split(' Amount: ') %}
+                    <li style="color: black;"><strong>Fertilizer Recommendation:</strong> {{ fert_parts[0] }}</li>
+                    <li style="color: black;"><strong>Amount of Fertilizer Use:</strong> {{ fert_parts[1] if fert_parts|length > 1 else '' }}</li>
+                    <li style="color: black;"><strong>Soil Moisture:</strong> {{ additional_info_dict[stage_num].soil_moisture }}</li>
+                </ol>
+                {% endif %}
+                        </td>
+                    </tr>
+                </table>
+                {% endfor %}
+                {% endif %}
+
+                {% if additional_info %}
+                <h3 class="text-center" style="color: black; font-size: 30px; margin-top: 2rem;">Additional Plant Information</h3>
+                <ul class="text-center" style="color: black; font-size: 22px; list-style: none; padding: 0;">
+                    <li><strong>Plant Info:</strong> {{ additional_info.plant_info }}</li>
+                    <li><strong>Fertilizer Recommendation:</strong> {{ additional_info.fertilizer_recommendation|safe }}</li>
+                    <li><strong>Soil Moisture:</strong> {{ additional_info.soil_moisture }}</li>
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
